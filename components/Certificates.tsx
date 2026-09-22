@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Certificate, SealCheck, GraduationCap, Medal } from "@phosphor-icons/react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const categories = ["All", "Design", "Tech", "Business & Skill"];
@@ -13,56 +14,64 @@ const certificates = [
     issuer: "Interaction Design Foundation",
     date: "2024",
     category: "Design",
-    icon: <Certificate size={32} weight="thin" />
+    image: "https://picsum.photos/seed/cert-1/800/600",
+    icon: <Certificate size={24} weight="thin" />
   },
   {
     name: "Google UX Design Professional",
     issuer: "Coursera / Google",
     date: "2023",
     category: "Design",
-    icon: <SealCheck size={32} weight="thin" />
+    image: "https://picsum.photos/seed/cert-2/800/600",
+    icon: <SealCheck size={24} weight="thin" />
   },
   {
     name: "Mastering Figma & Prototyping",
     issuer: "Design Academy",
     date: "2023",
     category: "Design",
-    icon: <GraduationCap size={32} weight="thin" />
+    image: "https://picsum.photos/seed/cert-3/800/600",
+    icon: <GraduationCap size={24} weight="thin" />
   },
   {
     name: "Visual Communication Principles",
     issuer: "Creative Arts School",
     date: "2022",
     category: "Design",
-    icon: <Medal size={32} weight="thin" />
+    image: "https://picsum.photos/seed/cert-4/800/600",
+    icon: <Medal size={24} weight="thin" />
   },
   {
     name: "Full-Stack Web Engineering",
     issuer: "Tech Masters",
     date: "2024",
     category: "Tech",
-    icon: <Certificate size={32} weight="thin" />
+    image: "https://picsum.photos/seed/cert-5/800/600",
+    icon: <Certificate size={24} weight="thin" />
   },
   {
     name: "React & Next.js Advanced Architecture",
     issuer: "Frontend Masters",
     date: "2023",
     category: "Tech",
-    icon: <SealCheck size={32} weight="thin" />
+    image: "https://picsum.photos/seed/cert-6/800/600",
+    icon: <SealCheck size={24} weight="thin" />
   },
   {
     name: "Agile Product Management",
     issuer: "Product School",
     date: "2023",
     category: "Business & Skill",
-    icon: <GraduationCap size={32} weight="thin" />
+    image: "https://picsum.photos/seed/cert-7/800/600",
+    icon: <GraduationCap size={24} weight="thin" />
   },
   {
     name: "Strategic Design Leadership",
     issuer: "Executive Business Institute",
     date: "2022",
     category: "Business & Skill",
-    icon: <Medal size={32} weight="thin" />
+    image: "https://picsum.photos/seed/cert-8/800/600",
+    icon: <Medal size={24} weight="thin" />
   }
 ];
 
@@ -123,16 +132,26 @@ export function Certificates() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:border-zinc-900 dark:hover:border-zinc-100 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-zinc-950/5 dark:hover:shadow-black/20"
+              className="group p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:border-zinc-900 dark:hover:border-zinc-100 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-zinc-950/5 dark:hover:shadow-black/25 flex flex-col justify-between"
             >
-              <div className="text-zinc-900 dark:text-white mb-6">
-                {cert.icon}
+              <div>
+                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900 mb-6">
+                  <Image
+                    src={cert.image}
+                    alt={cert.name}
+                    fill
+                    className="object-cover grayscale opacity-85 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-zinc-900 dark:text-white">
+                    {cert.icon}
+                  </div>
+                  <span className="text-xs font-mono text-zinc-400 dark:text-zinc-500 uppercase">{cert.date}</span>
+                </div>
+                <h3 className="text-lg font-bold tracking-tight mb-2 leading-tight">{cert.name}</h3>
               </div>
-              <h3 className="text-lg font-bold tracking-tight mb-2 leading-tight">{cert.name}</h3>
-              <div className="flex flex-col gap-1">
-                <span className="text-sm text-zinc-500 dark:text-zinc-400">{cert.issuer}</span>
-                <span className="text-xs font-mono text-zinc-400 dark:text-zinc-500">{cert.date}</span>
-              </div>
+              <span className="text-sm text-zinc-500 dark:text-zinc-400 mt-4">{cert.issuer}</span>
             </motion.div>
           ))}
         </div>

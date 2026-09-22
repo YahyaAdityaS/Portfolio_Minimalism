@@ -1,28 +1,28 @@
 "use client";
 
 import { motion } from "motion/react";
-import { DeviceMobile, Layout, PaintBrush, Strategy } from "@phosphor-icons/react";
+import { Compass, Rows, Palette, Code } from "@phosphor-icons/react";
 
 const services = [
   {
-    title: "Product Design",
-    description: "End-to-end design for web and mobile platforms.",
-    icon: <DeviceMobile size={32} weight="thin" />
+    title: "Product Design & Strategy",
+    description: "End-to-end product creation aligning user needs with business goals.",
+    icon: <Compass size={32} weight="thin" />
   },
   {
     title: "User Experience",
-    description: "Research, wireframing, and user testing to ensure flow.",
-    icon: <Layout size={32} weight="thin" />
+    description: "Research, wireframing, and usability testing to ensure seamless flow.",
+    icon: <Rows size={32} weight="thin" />
   },
   {
-    title: "Visual Identity",
-    description: "Building cohesive brands that stand out in the market.",
-    icon: <PaintBrush size={32} weight="thin" />
+    title: "UI & Brand Identity",
+    description: "Crafting distinct visual systems, UI elements, and cohesive graphic identities.",
+    icon: <Palette size={32} weight="thin" />
   },
   {
-    title: "Design Strategy",
-    description: "Aligning design goals with business objectives.",
-    icon: <Strategy size={32} weight="thin" />
+    title: "Web Development",
+    description: "Building modern, fast, and responsive web applications with clean code.",
+    icon: <Code size={32} weight="thin" />
   }
 ];
 

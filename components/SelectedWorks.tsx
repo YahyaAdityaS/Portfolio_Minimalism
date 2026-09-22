@@ -13,73 +13,73 @@ const projects = [
   {
     title: "Aetheria Platform",
     category: "UI/UX Design",
-    image: "https://picsum.photos/seed/tactile-1/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/tactile-1/1200/1600",
     link: "#"
   },
   {
     title: "Lumina Brand Identity",
     category: "Graphic Desain",
-    image: "https://picsum.photos/seed/geometric-2/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/geometric-2/1200/1600",
     link: "#"
   },
   {
     title: "Vortex Interface",
     category: "UI/UX Design",
-    image: "https://picsum.photos/seed/minimal-3/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/minimal-3/1200/1600",
     link: "#"
   },
   {
     title: "Nexus Mobile App",
     category: "UI/UX Design",
-    image: "https://picsum.photos/seed/shape-4/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/shape-4/1200/1600",
     link: "#"
   },
   {
     title: "Krypton Design System",
     category: "Web Development",
-    image: "https://picsum.photos/seed/system-5/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/system-5/1200/1600",
     link: "#"
   },
   {
     title: "Solstice Web App",
     category: "Web Development",
-    image: "https://picsum.photos/seed/web-6/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/web-6/1200/1600",
     link: "#"
   },
   {
     title: "Zenith E-Commerce",
     category: "Web Development",
-    image: "https://picsum.photos/seed/shop-7/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/shop-7/1200/1600",
     link: "#"
   },
   {
     title: "Horizon Dashboard",
     category: "UI/UX Design",
-    image: "https://picsum.photos/seed/dash-8/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/dash-8/1200/1600",
     link: "#"
   },
   {
     title: "Aura Lens Portfolio",
     category: "Photography",
-    image: "https://picsum.photos/seed/photo-9/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/photo-9/1200/1600",
     link: "#"
   },
   {
     title: "Chronos Gallery",
     category: "Photography",
-    image: "https://picsum.photos/seed/photo-10/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/photo-10/1200/1600",
     link: "#"
   },
   {
     title: "Vector Type Specimen",
     category: "Graphic Desain",
-    image: "https://picsum.photos/seed/graphic-11/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/graphic-11/1200/1600",
     link: "#"
   },
   {
     title: "Ember Branding System",
     category: "Graphic Desain",
-    image: "https://picsum.photos/seed/graphic-12/1200/1600?grayscale",
+    image: "https://picsum.photos/seed/graphic-12/1200/1600",
     link: "#"
   },
 ];
@@ -158,7 +158,7 @@ export function SelectedWorks() {
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover grayscale opacity-85 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                 </div>

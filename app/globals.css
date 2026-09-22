@@ -35,16 +35,17 @@
   }
 }
 
+/* Selection untuk Light Mode (Default) */
 ::selection {
-  background-color: var(--color-zinc-900);
-  color: var(--color-zinc-50);
+  background-color: #09090b !important; /* Background HITAM */
+  color: #fafafa !important;             /* Teks PUTIH */
 }
 
-@media (prefers-color-scheme: dark) {
-  ::selection {
-    background-color: var(--color-zinc-100);
-    color: var(--color-zinc-900);
-  }
+/* Selection untuk Dark Mode */
+.dark ::selection,
+[data-theme='dark'] ::selection {
+  background-color: #fafafa !important; /* Background PUTIH */
+  color: #09090b !important;             /* Teks HITAM */
 }
 
 body {
@@ -60,5 +61,11 @@ body {
 @layer base {
   * {
     @apply border-zinc-200 dark:border-zinc-800;
+  }
+}
+
+@media (pointer: fine) {
+  body, a, button, [role="button"], img, .card {
+    cursor: none !important;
   }
 }

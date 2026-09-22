@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "@phosphor-icons/react";
@@ -19,9 +19,28 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const isClickScrolling = useRef(false);
+
+  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    isClickScrolling.current = true;
+    setActiveSection(href);
+    const targetId = href.substring(1);
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+    setTimeout(() => {
+      isClickScrolling.current = false;
+    }, 800);
+    setMenuOpen(false);
+  };
 
   useEffect(() => {
-    setMounted(true);
+    const frame = requestAnimationFrame(() => {
+      setMounted(true);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -30,6 +49,7 @@ export function Navbar() {
     };
 
     const handleScrollObserver = () => {
+      if (isClickScrolling.current) return;
       const sections = ["work", "certificates", "services", "contact"];
       const scrollPosition = window.scrollY + 200;
 
@@ -68,7 +88,7 @@ export function Navbar() {
           : "w-full rounded-none bg-transparent px-6 md:px-12 py-6 border-0 shadow-none"
       )}>
         <Link href="/" className="text-xl font-bold tracking-tighter">
-          Alex Rivera.
+          Yahya Aditya.
         </Link>
         
         <div className="hidden md:flex items-center gap-2">
@@ -84,6 +104,7 @@ export function Navbar() {
                     ? "bg-zinc-200 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100 font-semibold"
                     : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
                 )}
+                onClick={(e) => handleNavLinkClick(e, link.href)}
               >
                 {link.name}
               </Link>
@@ -129,7 +150,7 @@ export function Navbar() {
               key={link.name} 
               href={link.href}
               className="text-lg font-medium text-zinc-900 dark:text-zinc-100"
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => handleNavLinkClick(e, link.href)}
             >
               {link.name}
             </Link>

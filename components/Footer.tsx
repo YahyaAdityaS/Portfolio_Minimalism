@@ -12,7 +12,7 @@ export function Footer() {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col items-center md:items-start gap-2">
-            <span className="text-xl font-bold tracking-tighter">Alex Rivera.</span>
+            <span className="text-xl font-bold tracking-tighter">Yahya Aditya.</span>
             <p className="text-sm text-zinc-500 dark:text-zinc-400">
               © {new Date().getFullYear()} / Made with focus and clarity.
             </p>
