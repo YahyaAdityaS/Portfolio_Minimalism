@@ -23,7 +23,7 @@ const educationData = [
 export function Education() {
   return (
     <section className="py-24 md:py-32">
-      <div className="container mx-auto px-6">
+      <div className="w-full mx-auto px-6 sm:px-8 md:px-[7%] lg:px-[7%] xl:px-[7%]">
         <div className="mb-16">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">Education</h2>
           <p className="text-lg text-zinc-500 dark:text-zinc-400 max-w-2xl">

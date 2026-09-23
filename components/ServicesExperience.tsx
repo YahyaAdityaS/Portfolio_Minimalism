@@ -50,7 +50,7 @@ const experience = [
 export function ServicesExperience() {
   return (
     <section className="py-24 md:py-32">
-      <div className="container mx-auto px-6">
+      <div className="w-full mx-auto px-6 sm:px-8 md:px-[7%] lg:px-[7%] xl:px-[7%]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 md:gap-32">
           {/* Services */}
           <div>

@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ArrowUpRight, GithubLogo, TwitterLogo, LinkedinLogo } from "@phosphor-icons/react";
+import { ArrowUpRight, GithubLogo, TwitterLogo, LinkedinLogo, InstagramLogo } from "@phosphor-icons/react";
 import Image from "next/image";
 
 export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 overflow-hidden">
-      <div className="container mx-auto px-6">
+      <div className="w-full mx-auto px-6 sm:px-8 md:px-[7%] lg:px-[7%] xl:px-[7%]">
         <div className="flex flex-col md:flex-row items-start justify-between gap-12">
           <div className="max-w-3xl">
             <motion.div
@@ -50,11 +50,14 @@ export function Hero() {
                 <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                   <GithubLogo size={24} />
                 </a>
-                <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                {/* <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                   <TwitterLogo size={24} />
-                </a>
+                </a> */}
                 <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                   <LinkedinLogo size={24} />
+                </a>
+                <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+              <InstagramLogo size={24} />
                 </a>
               </div>
             </motion.div>

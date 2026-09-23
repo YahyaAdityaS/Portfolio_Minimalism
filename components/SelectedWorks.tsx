@@ -104,7 +104,7 @@ export function SelectedWorks() {
 
   return (
     <section className="py-24 md:py-32 bg-zinc-50 dark:bg-zinc-900/50">
-      <div className="container mx-auto px-6">
+      <div className="w-full mx-auto px-6 sm:px-8 md:px-[7%] lg:px-[7%] xl:px-[7%]">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">Selected Works</h2>

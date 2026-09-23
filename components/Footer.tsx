@@ -9,7 +9,7 @@ export function Footer() {
 
   return (
     <footer className="py-12 border-t border-zinc-100 dark:border-zinc-900">
-      <div className="container mx-auto px-6">
+      <div className="w-full mx-auto px-6 sm:px-8 md:px-[7%] lg:px-[7%] xl:px-[7%]">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col items-center md:items-start gap-2">
             <span className="text-xl font-bold tracking-tighter">Yahya Aditya.</span>
@@ -22,9 +22,9 @@ export function Footer() {
             <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
               <GithubLogo size={24} />
             </a>
-            <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+            {/* <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
               <TwitterLogo size={24} />
-            </a>
+            </a> */}
             <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
               <LinkedinLogo size={24} />
             </a>
