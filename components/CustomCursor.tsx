@@ -19,8 +19,28 @@ export function CustomCursor() {
   const cursorXSpringOuter = useSpring(cursorX, springConfigOuter);
   const cursorYSpringOuter = useSpring(cursorY, springConfigOuter);
 
+  // Safely check desktop device without synchronous setState warning
   useEffect(() => {
-    setIsDesktop(window.matchMedia("(pointer: fine)").matches);
+    const mediaQuery = window.matchMedia("(pointer: fine)");
+    const frame = requestAnimationFrame(() => {
+      setIsDesktop(mediaQuery.matches);
+    });
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsDesktop(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, []);
+
+  // Handle mouse movements and hover states
+  useEffect(() => {
+    if (!isDesktop) return;
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -48,11 +68,10 @@ export function CustomCursor() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [cursorX, cursorY]);
+  }, [isDesktop, cursorX, cursorY]);
 
   if (!isDesktop) return null;
 
-  // Optimized variants
   const variants = {
     default: { scale: 1 },
     button: { scale: 1.25 },
@@ -63,12 +82,12 @@ export function CustomCursor() {
     <div className="pointer-events-none z-[9999] fixed inset-0">
       {/* Inner Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-white -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-zinc-900 dark:bg-zinc-100 -translate-x-1/2 -translate-y-1/2"
         style={{ x: cursorXSpringInner, y: cursorYSpringInner }}
       />
       {/* Outer Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-white -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-zinc-900/80 dark:border-zinc-100/80 -translate-x-1/2 -translate-y-1/2"
         style={{ x: cursorXSpringOuter, y: cursorYSpringOuter }}
         animate={{
           ...variants[variant as keyof typeof variants],
