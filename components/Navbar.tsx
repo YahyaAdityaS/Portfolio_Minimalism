@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useModal } from "@/lib/modal-context";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "@phosphor-icons/react";
@@ -20,8 +21,15 @@ export function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const isClickScrolling = useRef(false);
+  const { setIsContactModalOpen } = useModal();
 
   const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === "#contact") {
+      e.preventDefault();
+      setIsContactModalOpen(true);
+      setMenuOpen(false);
+      return;
+    }
     e.preventDefault();
     isClickScrolling.current = true;
     setActiveSection(href);
@@ -91,7 +99,7 @@ export function Navbar() {
           Yahya Aditya.
         </Link>
         
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden md:flex items-center gap-2 transition-colors duration-100">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href;
             return (
@@ -99,7 +107,7 @@ export function Navbar() {
                 key={link.name} 
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium px-4 py-2 rounded-full transition-all duration-300",
+                  "text-sm font-medium px-4 py-2 rounded-full transition-all duration-100",
                   isActive 
                     ? "bg-zinc-200 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100 font-semibold"
                     : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
@@ -114,7 +122,7 @@ export function Navbar() {
           {mounted && (
             <button
               onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-              className="p-2.5 rounded-full text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 transition-all hover:scale-105 active:scale-95 flex items-center justify-center ml-1"
+              className="p-2.5 rounded-full text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 transition-all duration-100 hover:scale-105 active:scale-95 flex items-center justify-center ml-1"
               aria-label="Toggle theme"
               title="Toggle theme"
             >
@@ -126,12 +134,12 @@ export function Navbar() {
             </button>
           )}
 
-          <Link 
-            href="#contact"
+          <button 
+            onClick={() => setIsContactModalOpen(true)}
             className="ml-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-5 py-2.5 rounded-full text-sm font-bold transition-transform hover:scale-105 active:scale-95 shadow-sm"
           >
             Let&apos;s Talk
-          </Link>
+          </button>
         </div>
         
         <button 

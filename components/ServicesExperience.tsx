@@ -87,7 +87,7 @@ export function ServicesExperience() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative pb-8 border-b border-zinc-100 dark:border-zinc-900 last:border-0"
+                  className="group relative pb-8 border-b border-zinc-200/50 dark:border-zinc-700/50 last:border-0 transition-colors duration-100"
                 >
                   <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-4">
                     <h3 className="text-2xl font-bold tracking-tight group-hover:text-zinc-500 transition-colors">

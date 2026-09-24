@@ -1,11 +1,14 @@
 "use client";
 
+import { useModal } from "@/lib/modal-context";
 import { motion } from "motion/react";
 import { ArrowRight, EnvelopeSimple } from "@phosphor-icons/react";
 
 export function Contact() {
+  const { setIsContactModalOpen } = useModal();
+  
   return (
-    <section className="py-24 md:py-40 bg-zinc-950 text-white overflow-hidden relative">
+    <section className="py-24 md:py-40 bg-zinc-950 text-white overflow-hidden relative" id="contact">
       {/* Decorative background element */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-zinc-900 rounded-full blur-[120px] opacity-50 pointer-events-none" />
 
@@ -24,14 +27,14 @@ export function Contact() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a 
-              href="mailto:hello@alexrivera.com"
-              className="group flex items-center gap-3 bg-white text-zinc-950 px-10 py-5 rounded-full font-bold text-lg transition-all hover:scale-105 active:scale-95"
+            <button 
+              onClick={() => setIsContactModalOpen(true)}
+              className="group flex items-center gap-3 bg-white text-zinc-950 px-10 py-5 rounded-full font-bold text-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
             >
               <EnvelopeSimple size={24} weight="bold" />
-              Get in Touch
+              Let&apos;s Talk
               <ArrowRight weight="bold" className="transition-transform group-hover:translate-x-1" />
-            </a>
+            </button>
             
             <a 
               href="#"

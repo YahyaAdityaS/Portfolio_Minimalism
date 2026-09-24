@@ -1,6 +1,6 @@
 export function BackgroundGrid() {
   return (
-    <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden bg-white dark:bg-zinc-950">
+    <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden bg-white dark:bg-zinc-950 transition-colors duration-100">
       {/* Container with Mask */}
       <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]">
         {/* Grid Pattern */}

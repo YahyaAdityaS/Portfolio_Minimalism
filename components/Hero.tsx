@@ -1,12 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowUpRight, GithubLogo, TwitterLogo, LinkedinLogo, InstagramLogo } from "@phosphor-icons/react";
+import { ArrowUpRight, GithubLogo, TwitterLogo, LinkedinLogo, InstagramLogo, DribbbleLogo, File } from "@phosphor-icons/react";
 import Image from "next/image";
+import { CvModal } from "./CvModal";
 
 export function Hero() {
+  const [isCvOpen, setIsCvOpen] = useState(false);
+
   return (
     <section className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 overflow-hidden">
+      <CvModal isOpen={isCvOpen} onClose={() => setIsCvOpen(false)} />
       <div className="w-full mx-auto px-6 sm:px-8 md:px-[7%] lg:px-[7%] xl:px-[7%]">
         <div className="flex flex-col md:flex-row items-start justify-between gap-12">
           <div className="max-w-3xl">
@@ -39,26 +44,37 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-center gap-6"
+              className="flex flex-wrap items-center gap-2"
             >
-              <button className="group relative flex items-center gap-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-8 py-4 rounded-full font-medium transition-all hover:scale-[1.02] active:scale-[0.98]">
+              <button className="group relative flex items-center justify-center gap-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-8 py-4 rounded-full font-medium transition-all hover:scale-[1.02] active:scale-[0.98]">
                 Let&apos;s Talk
                 <ArrowUpRight weight="bold" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
+
+              <button 
+                onClick={() => setIsCvOpen(true)}
+                className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-zinc-300 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-all hover:scale-[1.02] active:scale-[0.98] text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+              >
+                <File size={18} />
+                View CV
+              </button>
               
-              <div className="flex items-center gap-4">
-                <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+              <div className="flex items-center gap-2">
+                <a href="https://github.com/YahyaAdityaS" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                   <GithubLogo size={24} />
+                </a>
+                <a href="https://linkedin.com/in/yahyadityas" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                  <LinkedinLogo size={24} />
+                </a>
+                <a href="https://dribbble.com/Putra204247T" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                  <DribbbleLogo size={24} />
                 </a>
                 {/* <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                   <TwitterLogo size={24} />
                 </a> */}
-                <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                  <LinkedinLogo size={24} />
-                </a>
-                <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
-              <InstagramLogo size={24} />
-                </a>
+                {/* <a href="https://www.instagram.com/yahyaditya.s/" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                  <InstagramLogo size={24} />
+                </a> */}
               </div>
             </motion.div>
           </div>
@@ -69,13 +85,13 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="group relative mx-auto w-full max-w-[320px] sm:max-w-[360px] md:w-[40%] shrink-0"
           >
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl shadow-xl overflow-hidden">
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl shadow-xl overflow-hidden transition-colors duration-100">
               {/* macOS Header */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-100 dark:border-zinc-800">
+              <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-100 dark:border-zinc-800 transition-colors duration-100">
                 <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700 transition-colors duration-100" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700 transition-colors duration-100" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700 transition-colors duration-100" />
                 </div>
                 <div className="text-center">
                   <p className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">Yahya Aditya</p>
@@ -102,7 +118,7 @@ export function Hero() {
               </div>
 
               {/* Footer */}
-              <div className="px-4 py-3 bg-zinc-50/50 dark:bg-zinc-950/50 border-t border-zinc-100 dark:border-zinc-800">
+              <div className="px-4 py-3 bg-zinc-50/50 dark:bg-zinc-950/50 border-t border-zinc-100 dark:border-zinc-800 transition-colors duration-100">
                 <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300">@yahyaditya.s</p>
                 <p className="text-[10px] text-zinc-500">Product Designer & Developer</p>
               </div>
