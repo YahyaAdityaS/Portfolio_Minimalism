@@ -124,34 +124,33 @@ export function Certificates() {
           })}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
           {currentCertificates.map((cert, index) => (
             <motion.div
-              key={cert.name + index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:border-zinc-900 dark:hover:border-zinc-100 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-zinc-950/5 dark:hover:shadow-black/25 flex flex-col justify-between"
+              key={cert.name + selectedCategory}
+              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.1, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative w-full overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 p-5 sm:p-6 cursor-pointer transition-all duration-400 hover:border-zinc-400 dark:hover:border-zinc-600 shadow-sm flex flex-col justify-between"
             >
               <div>
-                <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900 mb-6">
+                <div className="relative w-full h-0 opacity-0 mb-0 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-900 group-hover:h-44 sm:group-hover:h-48 group-hover:opacity-100 group-hover:mb-4 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
                   <Image
                     src={cert.image}
                     alt={cert.name}
                     fill
-                    className="object-cover grayscale opacity-85 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+                    className="w-full h-full object-cover grayscale opacity-85 group-hover:scale-105 transition-transform duration-500 group-hover:grayscale-0 group-hover:opacity-100"
                   />
                 </div>
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between text-xs font-mono">
                   <div className="text-zinc-900 dark:text-white">
                     {cert.icon}
                   </div>
-                  <span className="text-xs font-mono text-zinc-400 dark:text-zinc-500 uppercase">{cert.date}</span>
+                  <span className="text-zinc-400 dark:text-zinc-500 uppercase">{cert.date}</span>
                 </div>
-                <h3 className="text-lg font-bold tracking-tight mb-2 leading-tight">{cert.name}</h3>
+                <h3 className="font-bold text-base sm:text-lg mt-2 tracking-tight leading-tight line-clamp-2 min-h-[3.5rem]">{cert.name}</h3>
               </div>
-              <span className="text-sm text-zinc-500 dark:text-zinc-400 mt-4">{cert.issuer}</span>
+              <span className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">{cert.issuer}</span>
             </motion.div>
           ))}
         </div>

@@ -33,7 +33,7 @@ export default function ProcessPage() {
 
     animeFn(containerRef.current, {
       scrollTop: targetScrollTop,
-      duration: 1000,
+      duration: 600,
       easing: 'easeInOutCubic',
       complete: () => {
         isAnimatingRef.current = false;
@@ -148,7 +148,7 @@ export default function ProcessPage() {
   return (
     <div 
       ref={containerRef}
-      className="h-screen w-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-zinc-200 dark:selection:bg-zinc-800 selection:text-zinc-900 dark:selection:text-white"
+      className="h-screen w-screen overflow-y-scroll snap-y snap-mandatory scroll-m-7 bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-zinc-200 dark:selection:bg-zinc-800 selection:text-zinc-900 dark:selection:text-white"
     >
       {/* Fixed Navigation Header - Aligned with px-6 sm:px-12 md:px-16 */}
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 sm:px-12 md:px-16 py-6 pointer-events-none">
@@ -170,7 +170,7 @@ export default function ProcessPage() {
           <button
             key={idx}
             onClick={() => scrollToSlide(idx)}
-            className={`transition-all duration-200 rounded-full cursor-pointer ${
+            className={`transition-all duration-1000 ease-in-out rounded-full cursor-pointer ${
               currentSlide === idx 
                 ? "w-2 h-8 bg-black dark:bg-white" 
                 : "w-2 h-2 bg-zinc-300 dark:bg-zinc-800 hover:bg-zinc-400 dark:hover:bg-zinc-600"
@@ -185,7 +185,7 @@ export default function ProcessPage() {
         ref={el => { slideRefs.current[0] = el; }}
         className="h-screen w-full snap-start snap-always flex flex-col justify-between px-6 sm:px-12 md:px-16 pt-24 pb-12 relative overflow-hidden"
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-zinc-200/35 dark:bg-zinc-900/20 opacity-35 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-zinc-200/35 dark:bg-zinc-900/20 opacity-35 rounded-full blur-[120px] pointer-events-none" />
         
         <div>
           <span className="slide-badge opacity-0 inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 rounded-full shadow-sm">

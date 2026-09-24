@@ -20,10 +20,11 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  const cvLink = "https://drive.google.com/file/d/1vC_aM5_BEx-YOUR_DRIVE_FILE_ID/preview";
+  const cvViewLink = "https://drive.google.com/file/d/1idau8HpnGoDLpPuugrO8oyWZEq3dn4kg/view?usp=sharing";
+  const cvEmbedLink = "https://drive.google.com/file/d/1idau8HpnGoDLpPuugrO8oyWZEq3dn4kg/preview";
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.origin + cvLink);
+    navigator.clipboard.writeText(cvViewLink);
     alert("Link CV berhasil disalin!");
   };
 
@@ -60,20 +61,20 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
               </div>
               <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Yahya_Aditya_CV.pdf</div>
               <div className="flex items-center gap-3">
-                <a href={cvLink} target="_blank" rel="noopener noreferrer" title="Buka Drive" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
+                <a href={cvViewLink} target="_blank" rel="noopener noreferrer" title="Buka Drive" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
                   <ArrowSquareOut size={18} />
                 </a>
                 <button onClick={handleCopyLink} title="Salin Link" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
                   <Copy size={18} />
                 </button>
-                <a href={cvLink} download title="Download CV" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
+                <a href={cvViewLink} download title="Download CV" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
                   <Download size={18} />
                 </a>
               </div>
             </div>
 
             {/* Content */}
-            <iframe src={cvLink} className="w-full h-[70vh] bg-white" title="CV" />
+            <iframe src={cvEmbedLink} className="w-full h-[70vh] bg-white border-0" title="CV" />
           </motion.div>
         </motion.div>
       )}

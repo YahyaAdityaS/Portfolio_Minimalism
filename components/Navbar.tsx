@@ -11,7 +11,7 @@ const navLinks = [
   { name: "Work", href: "#work" },
   { name: "Certificates", href: "#certificates" },
   { name: "Services", href: "#services" },
-  { name: "Contact", href: "#contact" },
+  { name: "Education", href: "#education" },
 ];
 
 export function Navbar() {
@@ -30,6 +30,13 @@ export function Navbar() {
       setMenuOpen(false);
       return;
     }
+    
+    // If it's an external page link, let it handle navigation naturally
+    if (href.startsWith('/')) {
+      setMenuOpen(false);
+      return;
+    }
+
     e.preventDefault();
     isClickScrolling.current = true;
     setActiveSection(href);
@@ -58,7 +65,7 @@ export function Navbar() {
 
     const handleScrollObserver = () => {
       if (isClickScrolling.current) return;
-      const sections = ["work", "certificates", "services", "contact"];
+      const sections = ["work", "certificates", "services", "education", "contact"];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -95,7 +102,16 @@ export function Navbar() {
           ? "w-full max-w-5xl bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-full px-6 py-3 shadow-sm" 
           : "w-full rounded-none bg-transparent px-6 md:px-12 py-6 border-0 shadow-none"
       )}>
-        <Link href="/" className="text-xl font-bold tracking-tighter">
+        <Link 
+          href="/" 
+          className="text-xl font-bold tracking-tighter"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setActiveSection("");
+            setMenuOpen(false);
+          }}
+        >
           Yahya Aditya.
         </Link>
         
