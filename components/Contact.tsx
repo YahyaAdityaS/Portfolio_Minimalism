@@ -37,7 +37,7 @@ export function Contact() {
             </button>
             
             <a 
-              href="#"
+              href="/process"
               className="text-white font-medium hover:text-zinc-400 transition-colors py-4 px-8"
             >
               View My Process
