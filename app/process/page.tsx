@@ -9,19 +9,25 @@ import { useModal } from "@/lib/modal-context";
 export default function ProcessPage() {
   const { setIsContactModalOpen } = useModal();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const currentSlideRef = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<(HTMLElement | null)[]>([]);
-  const isScrollingRef = useRef(false);
+  const isAnimatingRef = useRef(false);
   const totalSlides = 6;
 
   // Safe anime function reference using unknown type assertion for anime.js v4 (targets, parameters)
   const animeFn = anime as unknown as (targets: unknown, parameters?: unknown) => unknown;
 
-  const scrollToSlide = (index: number) => {
-    if (isScrollingRef.current || !containerRef.current) return;
-    if (index < 0 || index >= totalSlides) return;
+  useEffect(() => {
+    currentSlideRef.current = currentSlide;
+  }, [currentSlide]);
 
-    isScrollingRef.current = true;
+  const scrollToSlide = (index: number) => {
+    if (isAnimatingRef.current || !containerRef.current) return;
+    if (index < 0 || index >= totalSlides) return;
+    if (index === currentSlideRef.current) return;
+
+    isAnimatingRef.current = true;
     const slideHeight = containerRef.current.clientHeight;
     const targetScrollTop = index * slideHeight;
 
@@ -30,8 +36,9 @@ export default function ProcessPage() {
       duration: 1000,
       easing: 'easeInOutCubic',
       complete: () => {
-        isScrollingRef.current = false;
+        isAnimatingRef.current = false;
         setCurrentSlide(index);
+        currentSlideRef.current = index;
       }
     });
   };
@@ -42,21 +49,51 @@ export default function ProcessPage() {
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      if (isScrollingRef.current) return;
+      if (isAnimatingRef.current) return;
+      if (Math.abs(e.deltaY) < 20) return;
 
-      if (e.deltaY > 20 && currentSlide < totalSlides - 1) {
-        scrollToSlide(currentSlide + 1);
-      } else if (e.deltaY < -20 && currentSlide > 0) {
-        scrollToSlide(currentSlide - 1);
+      const current = currentSlideRef.current;
+      let target = current;
+
+      if (e.deltaY > 0 && current < totalSlides - 1) {
+        target = Math.min(current + 1, totalSlides - 1);
+      } else if (e.deltaY < 0 && current > 0) {
+        target = Math.max(current - 1, 0);
+      }
+
+      if (target !== current) {
+        scrollToSlide(target);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isAnimatingRef.current) return;
+
+      const current = currentSlideRef.current;
+      let target = current;
+
+      if ((e.key === 'ArrowDown' || e.key === 'PageDown') && current < totalSlides - 1) {
+        target = Math.min(current + 1, totalSlides - 1);
+        e.preventDefault();
+      } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && current > 0) {
+        target = Math.max(current - 1, 0);
+        e.preventDefault();
+      }
+
+      if (target !== current) {
+        scrollToSlide(target);
       }
     };
 
     container.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('keydown', handleKeyDown);
+
     return () => {
       container.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('keydown', handleKeyDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSlide]);
+  }, []);
 
   useEffect(() => {
     const currentSlideEl = slideRefs.current[currentSlide];
