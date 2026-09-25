@@ -87,7 +87,7 @@ export function ContactModal() {
               </div>
               <div className="text-xs font-mono font-medium text-zinc-500 tracking-tight flex items-center gap-1.5">
                 <Sparkle size={13} weight="fill" className="text-zinc-400" />
-                Let's_Talk.form
+                Let`s_Talk.form
               </div>
               <div className="w-12" />
             </div>
