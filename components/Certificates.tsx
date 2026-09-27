@@ -1,88 +1,96 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
-import { Certificate, SealCheck, GraduationCap, Medal } from "@phosphor-icons/react";
+import { Medal, ArrowClockwise } from "@phosphor-icons/react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { CertificateData, CertificateModal } from "./CertificatesModal";
+
+const GAS_URL = "https://script.google.com/macros/s/AKfycby2xBbKIOIgxgV2vJP0HUh-ChqUoI47GKKImeMT_u9WKBOUqPL5oH-a6TdnVbJ2wyAG/exec";
 
 const categories = ["All", "Design", "Tech", "Business & Skill"];
 
-const certificates = [
-  {
-    name: "Advanced Interaction Design",
-    issuer: "Interaction Design Foundation",
-    date: "2024",
-    category: "Design",
-    image: "https://picsum.photos/seed/cert-1/800/600",
-    icon: <Certificate size={24} weight="thin" />
-  },
-  {
-    name: "Google UX Design Professional",
-    issuer: "Coursera / Google",
-    date: "2023",
-    category: "Design",
-    image: "https://picsum.photos/seed/cert-2/800/600",
-    icon: <SealCheck size={24} weight="thin" />
-  },
-  {
-    name: "Mastering Figma & Prototyping",
-    issuer: "Design Academy",
-    date: "2023",
-    category: "Design",
-    image: "https://picsum.photos/seed/cert-3/800/600",
-    icon: <GraduationCap size={24} weight="thin" />
-  },
-  {
-    name: "Visual Communication Principles",
-    issuer: "Creative Arts School",
-    date: "2022",
-    category: "Design",
-    image: "https://picsum.photos/seed/cert-4/800/600",
-    icon: <Medal size={24} weight="thin" />
-  },
-  {
-    name: "Full-Stack Web Engineering",
-    issuer: "Tech Masters",
-    date: "2024",
-    category: "Tech",
-    image: "https://picsum.photos/seed/cert-5/800/600",
-    icon: <Certificate size={24} weight="thin" />
-  },
-  {
-    name: "React & Next.js Advanced Architecture",
-    issuer: "Frontend Masters",
-    date: "2023",
-    category: "Tech",
-    image: "https://picsum.photos/seed/cert-6/800/600",
-    icon: <SealCheck size={24} weight="thin" />
-  },
-  {
-    name: "Agile Product Management",
-    issuer: "Product School",
-    date: "2023",
-    category: "Business & Skill",
-    image: "https://picsum.photos/seed/cert-7/800/600",
-    icon: <GraduationCap size={24} weight="thin" />
-  },
-  {
-    name: "Strategic Design Leadership",
-    issuer: "Executive Business Institute",
-    date: "2022",
-    category: "Business & Skill",
-    image: "https://picsum.photos/seed/cert-8/800/600",
-    icon: <Medal size={24} weight="thin" />
-  }
-];
+interface GasCertificate {
+  id?: number | string;
+  name?: string;
+  title?: string;
+  desc?: string;
+  description?: string;
+  tags?: string[] | string;
+  category?: string;
+  year?: string;
+  image?: string;
+  img?: string;
+}
+
+function CertificateSkeleton() {
+  return (
+    <div className="group">
+      <div className="aspect-[4/3] w-full rounded-3xl bg-zinc-200 dark:bg-zinc-800 animate-pulse mb-6" />
+      <div className="flex items-center justify-between">
+        <div className="w-full">
+          <div className="h-5 w-3/4 rounded-md bg-zinc-200 dark:bg-zinc-800 animate-pulse mb-2" />
+          <div className="h-3 w-1/3 rounded-md bg-zinc-200 dark:bg-zinc-800 animate-pulse" />
+        </div>
+        <div className="w-10 h-10 rounded-full bg-zinc-200 dark:bg-zinc-800 animate-pulse shrink-0 ml-4" />
+      </div>
+    </div>
+  );
+}
 
 export function Certificates() {
+  const [certificates, setCertificates] = useState<CertificateData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCertificate, setSelectedCertificate] = useState<CertificateData | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4; // 4 items per page for certificates
+  const itemsPerPage = 4;
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch(`${GAS_URL}?t=${Date.now()}`)
+      .then((res) => res.json())
+      .then((data: unknown) => {
+        if (!isMounted) return;
+        const rawData = data as { data?: GasCertificate[]; certificates?: GasCertificate[]; [key: string]: unknown };
+        const items = Array.isArray(data) ? data : rawData?.data || rawData?.certificates;
+        if (items && Array.isArray(items) && items.length > 0) {
+          const mapped: CertificateData[] = items.map((item: GasCertificate, idx: number) => ({
+            id: Number(item.id) || idx + 1,
+            name: item.name || item.title || "Untitled Certificate",
+            desc: item.desc || item.description || "",
+            tags: Array.isArray(item.tags)
+              ? item.tags
+              : typeof item.tags === "string"
+              ? item.tags.split(",").map((t: string) => t.trim()).filter(Boolean)
+              : ["Design", "Certificate"],
+            category: item.category || "Design",
+            year: item.year || "2024",
+            image: item.image || item.img || `https://picsum.photos/seed/cert-${idx + 1}/800/600`,
+          }));
+          setCertificates(mapped);
+        }
+      })
+      .catch((err) => {
+        if (!isMounted) return;
+        console.error("Error fetching certificates:", err);
+      })
+      .finally(() => {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const filteredCertificates = selectedCategory === "All"
     ? certificates
-    : certificates.filter(c => c.category === selectedCategory);
+    : certificates.filter(c => c.category.toLowerCase() === selectedCategory.toLowerCase());
 
   const totalPages = Math.ceil(filteredCertificates.length / itemsPerPage) || 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -94,12 +102,12 @@ export function Certificates() {
   };
 
   return (
-    <section className="py-24 md:py-32">
+    <section id="certificates" className="py-24 md:py-32">
       <div className="w-full mx-auto px-6 sm:px-8 md:px-[7%] lg:px-[7%] xl:px-[7%]">
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">Certificates</h2>
           <p className="text-lg text-zinc-500 dark:text-zinc-400 max-w-2xl">
-            Continuous learning is the foundation of my design practice. These certifications represent my dedication to the craft.
+            Continuous learning is the foundation of my practice. These certifications represent my dedication to the craft.
           </p>
         </div>
 
@@ -124,39 +132,86 @@ export function Certificates() {
           })}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
-          {currentCertificates.map((cert, index) => (
-            <motion.div
-              key={cert.name + selectedCategory}
-              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.1, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative w-full overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 p-5 sm:p-6 cursor-pointer transition-all duration-400 hover:border-zinc-400 dark:hover:border-zinc-600 shadow-sm flex flex-col justify-between"
+        {isLoading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {[...Array(4)].map((_, i) => (
+              <CertificateSkeleton key={i} />
+            ))}
+          </div>
+        ) : filteredCertificates.length === 0 ? (
+          <motion.div 
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="col-span-full py-16 sm:py-20 px-6 rounded-3xl border border-dashed border-zinc-300 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/30 flex flex-col items-center justify-center text-center max-w-xl mx-auto my-8 backdrop-blur-sm"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 flex items-center justify-center text-zinc-500 dark:text-zinc-400 mb-5 shadow-inner">
+              <Medal size={28} weight="duotone" />
+            </div>
+            <span className="px-3 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-600 dark:text-zinc-400 mb-3 border border-zinc-300/40 dark:border-zinc-700/40">
+              0 Certificates Found
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-2">
+              No Certificates in This Category
+            </h3>
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-md leading-relaxed mb-6">
+              Certifications for this category are currently being updated. You can explore other categories or view all certificates.
+            </p>
+            <button
+              onClick={() => {
+                setSelectedCategory("All");
+                setCurrentPage(1);
+              }}
+              className="px-5 py-2.5 rounded-full text-xs font-semibold bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 hover:scale-[1.03] active:scale-[0.98] transition-all flex items-center gap-2 shadow-md hover:shadow-lg cursor-pointer"
             >
-              <div>
-                <div className="relative w-full h-0 opacity-0 mb-0 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-900 group-hover:h-44 sm:group-hover:h-48 group-hover:opacity-100 group-hover:mb-4 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                  <Image
-                    src={cert.image}
-                    alt={cert.name}
-                    fill
-                    className="w-full h-full object-cover grayscale opacity-85 group-hover:scale-105 transition-transform duration-500 group-hover:grayscale-0 group-hover:opacity-100"
-                  />
-                </div>
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <div className="text-zinc-900 dark:text-white">
-                    {cert.icon}
+              <ArrowClockwise size={16} weight="bold" />
+              <span>View All Certificates</span>
+            </button>
+          </motion.div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {currentCertificates.map((cert, index) => (
+              <motion.div
+                key={cert.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="group transition-all duration-500 ease-out hover:-translate-y-2 cursor-pointer"
+                onClick={() => setSelectedCertificate(cert)}
+              >
+                <div className="block">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
+                    {cert.image && (
+                      <Image
+                        src={cert.image}
+                        alt={cert.name}
+                        fill
+                        unoptimized
+                        className="object-cover grayscale opacity-85 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                   </div>
-                  <span className="text-zinc-400 dark:text-zinc-500 uppercase">{cert.date}</span>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-lg font-semibold tracking-tight mb-1 line-clamp-2">{cert.name}</h3>
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-wider">
+                        {cert.category} {cert.year ? `• ${cert.year}` : ""}
+                      </p>
+                    </div>
+                    <div className="w-10 h-10 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center transition-all group-hover:bg-zinc-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-zinc-900 shrink-0">
+                      <Medal weight="bold" size={16} />
+                    </div>
+                  </div>
                 </div>
-                <h3 className="font-bold text-base sm:text-lg mt-2 tracking-tight leading-tight line-clamp-2 min-h-[3.5rem]">{cert.name}</h3>
-              </div>
-              <span className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">{cert.issuer}</span>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
 
         {/* Modern Minimalist Pagination */}
-        {totalPages > 1 && (
+        {!isLoading && totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 mt-16">
             <button
               onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
@@ -193,6 +248,11 @@ export function Certificates() {
           </div>
         )}
       </div>
+
+      <CertificateModal
+        certificate={selectedCertificate}
+        onClose={() => setSelectedCertificate(null)}
+      />
     </section>
   );
 }
