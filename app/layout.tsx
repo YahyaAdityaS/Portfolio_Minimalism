@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yahya Aditya — Product Designer",
-  description: "Designs digital products with emphasis on human connection.",
+  title: "Yahya Aditya Saputra — UI/UX Designer & Web Developer",
+  description: "Product-minded UI/UX Designer and Front-End Developer crafting seamless digital experiences, modern design systems, and scalable web apps.",
   icons: {
     icon: "/yas.png",
   },
