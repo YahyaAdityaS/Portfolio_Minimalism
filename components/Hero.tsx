@@ -5,9 +5,11 @@ import { motion } from "motion/react";
 import { ArrowUpRight, GithubLogo, TwitterLogo, LinkedinLogo, InstagramLogo, DribbbleLogo, File } from "@phosphor-icons/react";
 import Image from "next/image";
 import { CvModal } from "./CvModal";
+import { useModal } from "@/lib/modal-context";
 
 export function Hero() {
   const [isCvOpen, setIsCvOpen] = useState(false);
+  const { setIsContactModalOpen } = useModal();
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 overflow-hidden">
@@ -46,7 +48,10 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-wrap items-center gap-2"
             >
-              <button className="group relative flex items-center justify-center gap-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-8 py-4 rounded-full font-medium transition-all hover:scale-[1.02] active:scale-[0.98]">
+              <button 
+                onClick={() => setIsContactModalOpen(true)}
+                className="group relative flex items-center justify-center gap-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-8 py-4 rounded-full font-medium transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
                 Let&apos;s Talk
                 <ArrowUpRight weight="bold" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>

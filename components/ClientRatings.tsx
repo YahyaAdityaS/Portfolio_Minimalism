@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Star, Quotes, Pencil } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
@@ -27,21 +27,37 @@ export function ClientRatings() {
     try {
       const response = await fetch(SCRIPT_URL);
       const data = await response.json();
-      setTestimonials(data);
-      localStorage.setItem("cached_ratings", JSON.stringify(data));
+      React.startTransition(() => {
+        setTestimonials(data);
+        localStorage.setItem("cached_ratings", JSON.stringify(data));
+        setIsLoading(false);
+      });
     } catch (error) {
       console.error("Error fetching ratings:", error);
-    } finally {
-      setIsLoading(false);
+      React.startTransition(() => {
+        setIsLoading(false);
+      });
     }
   };
 
   useEffect(() => {
-    const cached = localStorage.getItem("cached_ratings");
-    if (cached) {
-      setTestimonials(JSON.parse(cached));
-      setIsLoading(false);
+    // 1. Baca cache secara instan dari localStorage di client
+    try {
+      const cached = localStorage.getItem("cached_ratings");
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          queueMicrotask(() => {
+            setTestimonials(parsed);
+            setIsLoading(false);
+          });
+        }
+      }
+    } catch (e) {
+      console.error(e);
     }
+
+    // 2. Lakukan background fetch
     fetchTestimonials();
   }, []);
 
@@ -154,14 +170,32 @@ export function ClientRatings() {
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 mt-16">
             <button
-              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
               disabled={currentPage === 1}
               className="px-4 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >
               Prev
             </button>
+            {[...Array(totalPages)].map((_, i) => {
+              const pageNum = i + 1;
+              const isActive = pageNum === currentPage;
+              return (
+                <button
+                  key={pageNum}
+                  onClick={() => setCurrentPage(pageNum)}
+                  className={cn(
+                    "w-10 h-10 rounded-full text-sm font-semibold transition-all duration-300 flex items-center justify-center",
+                    isActive
+                      ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-md"
+                      : "border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-900 dark:hover:border-zinc-100"
+                  )}
+                >
+                  {pageNum}
+                </button>
+              );
+            })}
             <button
-              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
               disabled={currentPage === totalPages}
               className="px-4 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, FolderSimpleDashed, ArrowClockwise } from "@phosphor-icons/react";
 import Image from "next/image";
@@ -52,50 +52,63 @@ export function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const itemsPerPage = 8; // 4 cols x 2 rows
 
-  useEffect(() => {
-    let isMounted = true;
-
-    fetch(`${GAS_URL}?t=${Date.now()}`)
-      .then((res) => res.json())
-      .then((data: unknown) => {
-        if (isMounted) {
-          const rawData = data as { data?: GasProject[]; projects?: GasProject[]; [key: string]: unknown };
-          const items = Array.isArray(data) ? data : rawData?.data || rawData?.projects;
-          if (items && Array.isArray(items) && items.length > 0) {
-            const mapped: Project[] = items.map((item: GasProject, idx: number) => ({
-              id: Number(item.id) || idx + 1,
-              title: item.title || item.name || "Untitled Project",
-              desc: item.desc || item.description || "No description provided.",
-              tags: Array.isArray(item.tags)
-                ? item.tags
-                : typeof item.tags === "string"
-                ? item.tags.split(",").map((t: string) => t.trim())
-                : ["Web", "Design"],
-              image: item.image || item.img || "https://picsum.photos/seed/default/1200/1600",
-              github: item.github || item.source || "",
-              demo: item.demo || item.url || "",
-              category: item.category || "Web Development",
-              year: item.year || "2024",
-            }));
-            setProjects(mapped);
-          }
-        }
-      })
-      .catch((err) => {
-        if (isMounted) {
-          console.error("Error fetching projects:", err);
-        }
-      })
-      .finally(() => {
-        if (isMounted) {
+  const fetchProjects = async () => {
+    try {
+      const response = await fetch(`${GAS_URL}?t=${Date.now()}`);
+      const data = await response.json();
+      const rawData = data as { data?: GasProject[]; projects?: GasProject[]; [key: string]: unknown };
+      const items = Array.isArray(data) ? data : rawData?.data || rawData?.projects;
+      if (items && Array.isArray(items) && items.length > 0) {
+        const mapped: Project[] = items.map((item: GasProject, idx: number) => ({
+          id: Number(item.id) || idx + 1,
+          title: item.title || item.name || "Untitled Project",
+          desc: item.desc || item.description || "No description provided.",
+          tags: Array.isArray(item.tags)
+            ? item.tags
+            : typeof item.tags === "string"
+            ? item.tags.split(",").map((t: string) => t.trim())
+            : ["Web", "Design"],
+          image: item.image || item.img || "https://picsum.photos/seed/default/1200/1600",
+          github: item.github || item.source || "",
+          demo: item.demo || item.url || "",
+          category: item.category || "Web Development",
+          year: item.year || "2024",
+        }));
+        React.startTransition(() => {
+          setProjects(mapped);
+          localStorage.setItem("cached_projects", JSON.stringify(mapped));
           setIsLoading(false);
-        }
-      });
+        });
+        return;
+      }
+    } catch (err) {
+      console.error("Error fetching projects:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    return () => {
-      isMounted = false;
-    };
+  useEffect(() => {
+    // 1. Baca cache secara instan dari localStorage di client
+    try {
+      const cached = localStorage.getItem("cached_projects");
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          React.startTransition(() => {
+            setProjects(parsed);
+            setIsLoading(false);
+          });
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    // 2. Lakukan background fetch
+    fetchProjects();
   }, []);
+
 
   const getCategoryRank = (category: string) => {
     const cat = category.toLowerCase().trim();

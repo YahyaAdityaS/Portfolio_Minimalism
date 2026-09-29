@@ -97,14 +97,39 @@ export function RatingModal({ isOpen, onClose, onSuccess }: RatingModalProps) {
                   animate={{ opacity: 1, scale: 1 }}
                   className="flex flex-col items-center justify-center text-center py-6 space-y-4"
                 >
-                  <div className="w-16 h-16 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center shadow-md">
-                    <Check size={30} weight="bold" />
+                {/* Badge with micro-confetti particles */}
+                  <div className="relative w-36 h-36 flex items-center justify-center mx-auto my-2">
+                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.6 }} transition={{ delay: 0.05 }} className="absolute top-2 left-4 w-2 h-2 rounded-full bg-black/50 dark:bg-white/50" />
+                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.7 }} transition={{ delay: 0.1 }} className="absolute top-0 right-6 text-xs font-bold text-black/60 dark:text-white/60">+</motion.div>
+                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.5 }} transition={{ delay: 0.15 }} className="absolute top-8 right-2 w-3 h-1.5 rounded-full bg-black/40 dark:bg-white/40 rotate-45" />
+                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.8 }} transition={{ delay: 0.08 }} className="absolute bottom-6 left-1 w-1.5 h-3 rounded-full bg-black/50 dark:bg-white/50 -rotate-12" />
+                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.6 }} transition={{ delay: 0.2 }} className="absolute bottom-2 left-10 text-xs font-bold text-black/60 dark:text-white/60">+</motion.div>
+                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.5 }} transition={{ delay: 0.12 }} className="absolute bottom-1 right-8 w-2 h-2 rounded-full bg-black/40 dark:bg-white/40" />
+                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.7 }} transition={{ delay: 0.25 }} className="absolute top-12 left-2 w-1.5 h-1.5 rounded-full bg-black/60 dark:bg-white/60" />
+                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.6 }} transition={{ delay: 0.18 }} className="absolute bottom-8 right-3 text-xs font-bold text-black/50 dark:text-white/50">+</motion.div>
+                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.5 }} transition={{ delay: 0.22 }} className="absolute top-5 right-14 w-2.5 h-1 rounded-full bg-black/50 dark:bg-white/50 rotate-90" />
+                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.6 }} transition={{ delay: 0.14 }} className="absolute bottom-4 left-16 w-1.5 h-1.5 rounded-full bg-black/40 dark:bg-white/40" />
+
+                    <motion.div 
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="relative flex items-center justify-center w-16 h-16 rounded-full bg-black dark:bg-white text-white dark:text-black shadow-md ring-8 ring-black/5 dark:ring-white/5"
+                    >
+                      <Check size={30} weight="bold" />
+                    </motion.div>
                   </div>
-                  <h3 className="text-xl font-bold text-zinc-900 dark:text-white">Review Submitted!</h3>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400">Thanks for your feedback!</p>
+
+                  <div className="space-y-2 mt-2">
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white">Review Submitted!</h3>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2 text-center max-w-xs leading-relaxed">
+                      Thanks for your feedback!
+                    </p>
+                  </div>
+
                   <button
                     onClick={onClose}
-                    className="w-full py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black font-medium hover:opacity-90 transition shadow-md active:scale-95 cursor-pointer text-sm"
+                    className="w-full py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black font-medium hover:opacity-90 transition mt-6 shadow-md active:scale-95 cursor-pointer text-sm"
                   >
                     Done
                   </button>
@@ -134,7 +159,7 @@ export function RatingModal({ isOpen, onClose, onSuccess }: RatingModalProps) {
                       Submit Review & Rating
                     </h2>
                     <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                      I'd love to hear about your experience.
+                      Id love to hear about your experience.
                     </p>
                   </div>
 
@@ -156,7 +181,7 @@ export function RatingModal({ isOpen, onClose, onSuccess }: RatingModalProps) {
                               weight={(hoveredRating || formData.rating) >= star ? "fill" : "regular"} 
                               className={cn(
                                 "transition-colors",
-                                (hoveredRating || formData.rating) >= star ? "text-yellow-400" : "text-zinc-300 dark:text-zinc-700"
+                                (hoveredRating || formData.rating) >= star ? "text-zinc-900 dark:text-zinc-100 fill-current" : "text-zinc-300 dark:text-zinc-700"
                               )}
                             />
                           </button>

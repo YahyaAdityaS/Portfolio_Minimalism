@@ -105,7 +105,7 @@ export default function ProcessPage() {
             Ready to build something impactful?
           </h2>
           <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 font-light mb-10 max-w-xl">
-            Let's combine rigorous design thinking and technical execution to bring your vision to life.
+            Let&apos;s combine rigorous design thinking and technical execution to bring your vision to life.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -114,7 +114,8 @@ export default function ProcessPage() {
               className="group flex items-center gap-2 bg-black text-white dark:bg-white dark:text-zinc-950 px-8 py-4 rounded-full font-medium text-base transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-md"
             >
               <EnvelopeSimple size={20} weight="bold" />
-              Let's Talk
+              Let&apos;s Talk
+
               <ArrowRight weight="bold" className="transition-transform group-hover:translate-x-1" />
             </button>
 

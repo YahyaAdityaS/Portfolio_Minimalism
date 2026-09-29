@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Medal, ArrowClockwise } from "@phosphor-icons/react";
 import Image from "next/image";
@@ -47,41 +47,62 @@ export function Certificates() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
+  const fetchCertificates = async () => {
+    try {
+      const res = await fetch(`${GAS_URL}?t=${Date.now()}`);
+      const data = await res.json();
+      const rawData = data as { data?: GasCertificate[]; certificates?: GasCertificate[]; [key: string]: unknown };
+      const items = Array.isArray(data) ? data : rawData?.data || rawData?.certificates;
+      if (items && Array.isArray(items) && items.length > 0) {
+        const mapped: CertificateData[] = items.map((item: GasCertificate, idx: number) => ({
+          id: Number(item.id) || idx + 1,
+          name: item.name || item.title || "Untitled Certificate",
+          desc: item.desc || item.description || "",
+          tags: Array.isArray(item.tags)
+            ? item.tags
+            : typeof item.tags === "string"
+            ? item.tags.split(",").map((t: string) => t.trim()).filter(Boolean)
+            : ["Design", "Certificate"],
+          category: item.category || "Design",
+          year: item.year || "2024",
+          image: item.image || item.img || `https://picsum.photos/seed/cert-${idx + 1}/800/600`,
+        }));
+        React.startTransition(() => {
+          setCertificates(mapped);
+          localStorage.setItem("cached_certificates", JSON.stringify(mapped));
+          setIsLoading(false);
+        });
+        return;
+      }
+    } catch (err) {
+      console.error("Error fetching certificates:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     let isMounted = true;
 
-    fetch(`${GAS_URL}?t=${Date.now()}`)
-      .then((res) => res.json())
-      .then((data: unknown) => {
-        if (!isMounted) return;
-        const rawData = data as { data?: GasCertificate[]; certificates?: GasCertificate[]; [key: string]: unknown };
-        const items = Array.isArray(data) ? data : rawData?.data || rawData?.certificates;
-        if (items && Array.isArray(items) && items.length > 0) {
-          const mapped: CertificateData[] = items.map((item: GasCertificate, idx: number) => ({
-            id: Number(item.id) || idx + 1,
-            name: item.name || item.title || "Untitled Certificate",
-            desc: item.desc || item.description || "",
-            tags: Array.isArray(item.tags)
-              ? item.tags
-              : typeof item.tags === "string"
-              ? item.tags.split(",").map((t: string) => t.trim()).filter(Boolean)
-              : ["Design", "Certificate"],
-            category: item.category || "Design",
-            year: item.year || "2024",
-            image: item.image || item.img || `https://picsum.photos/seed/cert-${idx + 1}/800/600`,
-          }));
-          setCertificates(mapped);
+    const restoreCachedCertificates = () => {
+      try {
+        const cached = localStorage.getItem("cached_certificates");
+        if (!cached || !isMounted) return;
+
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          React.startTransition(() => {
+            setCertificates(parsed);
+            setIsLoading(false);
+          });
         }
-      })
-      .catch((err) => {
-        if (!isMounted) return;
-        console.error("Error fetching certificates:", err);
-      })
-      .finally(() => {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      });
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    restoreCachedCertificates();
+    fetchCertificates();
 
     return () => {
       isMounted = false;
