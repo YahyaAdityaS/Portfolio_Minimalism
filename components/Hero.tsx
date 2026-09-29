@@ -36,7 +36,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.1] mb-8 pb-1"
             >
-              Yahya Aditya. <br />
+              Yahya Aditya Saputra. <br />
               <span className="text-zinc-400">Designs digital products</span> with emphasis on <span className="italic">human</span> connection.
             </motion.h1>
 

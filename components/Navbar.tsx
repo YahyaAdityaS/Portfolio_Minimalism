@@ -112,7 +112,7 @@ export function Navbar() {
             setMenuOpen(false);
           }}
         >
-          Yahya Aditya.
+          Yahya Aditya S.
         </Link>
         
         <div className="hidden md:flex items-center gap-2 transition-colors duration-100">
