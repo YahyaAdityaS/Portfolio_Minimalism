@@ -18,10 +18,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://yahyadityas.my.id'),
   title: "Yahya Aditya Saputra — UI/UX Designer & Web Developer",
   description: "Product-minded UI/UX Designer and Front-End Developer crafting seamless digital experiences, modern design systems, and scalable web apps.",
   icons: {
     icon: "/yas.png",
+  },
+  alternates: {
+    canonical: '/',
   },
 };
 
