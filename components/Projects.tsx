@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Project, ProjectModal } from "./ProjectModal";
+import { fetchFromGAS } from "@/lib/api";
 
 const GAS_URL = "https://script.google.com/macros/s/AKfycbwFEtOp4q-9DhDuDL-3-xesVDLyw2orVgrMkUWpv98EC7zEXXbuwWrMhCaT3jTGfbAy/exec";
 
@@ -53,37 +54,37 @@ export function Projects() {
   const itemsPerPage = 8; // 4 cols x 2 rows
 
   const fetchProjects = async () => {
-    try {
-      const response = await fetch(`${GAS_URL}?t=${Date.now()}`);
-      const data = await response.json();
-      const rawData = data as { data?: GasProject[]; projects?: GasProject[]; [key: string]: unknown };
-      const items = Array.isArray(data) ? data : rawData?.data || rawData?.projects;
-      if (items && Array.isArray(items) && items.length > 0) {
-        const mapped: Project[] = items.map((item: GasProject, idx: number) => ({
-          id: Number(item.id) || idx + 1,
-          title: item.title || item.name || "Untitled Project",
-          desc: item.desc || item.description || "No description provided.",
-          tags: Array.isArray(item.tags)
-            ? item.tags
-            : typeof item.tags === "string"
-            ? item.tags.split(",").map((t: string) => t.trim())
-            : ["Web", "Design"],
-          image: item.image || item.img || "https://picsum.photos/seed/default/1200/1600",
-          github: item.github || item.source || "",
-          demo: item.demo || item.url || "",
-          category: item.category || "Web Development",
-          year: item.year || "2024",
-        }));
-        React.startTransition(() => {
-          setProjects(mapped);
-          localStorage.setItem("cached_projects", JSON.stringify(mapped));
-          setIsLoading(false);
-        });
-        return;
-      }
-    } catch (err) {
-      console.error("Error fetching projects:", err);
-    } finally {
+    const data = await fetchFromGAS(GAS_URL, "cached_projects");
+    if (!data) {
+      setIsLoading(false);
+      return;
+    }
+
+    const rawData = data as { data?: GasProject[]; projects?: GasProject[]; [key: string]: unknown };
+    const items = Array.isArray(data) ? data : rawData?.data || rawData?.projects;
+    
+    if (items && Array.isArray(items) && items.length > 0) {
+      const mapped: Project[] = items.map((item: GasProject, idx: number) => ({
+        id: Number(item.id) || idx + 1,
+        title: item.title || item.name || "Untitled Project",
+        desc: item.desc || item.description || "No description provided.",
+        tags: Array.isArray(item.tags)
+          ? item.tags
+          : typeof item.tags === "string"
+          ? item.tags.split(",").map((t: string) => t.trim())
+          : ["Web", "Design"],
+        image: item.image || item.img || "https://picsum.photos/seed/default/1200/1600",
+        github: item.github || item.source || "",
+        demo: item.demo || item.url || "",
+        category: item.category || "Web Development",
+        year: item.year || "2024",
+      }));
+      React.startTransition(() => {
+        setProjects(mapped);
+        localStorage.setItem("cached_projects", JSON.stringify(mapped));
+        setIsLoading(false);
+      });
+    } else {
       setIsLoading(false);
     }
   };
@@ -106,7 +107,8 @@ export function Projects() {
     }
 
     // 2. Lakukan background fetch
-    fetchProjects();
+    // Defer the state updates performed by fetchProjects until after the effect.
+    void Promise.resolve().then(() => fetchProjects());
   }, []);
 
 

@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { Star, Quotes, Pencil } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { RatingModal } from "./RatingModal";
+import { fetchFromGAS } from "@/lib/api";
 
 interface Testimonial {
   name: string;
@@ -24,19 +25,15 @@ export function ClientRatings() {
   const itemsPerPage = 3;
 
   const fetchTestimonials = async () => {
-    try {
-      const response = await fetch(SCRIPT_URL);
-      const data = await response.json();
+    const data = await fetchFromGAS(SCRIPT_URL, "cached_ratings");
+    if (data) {
       React.startTransition(() => {
-        setTestimonials(data);
+        setTestimonials(data as Testimonial[]);
         localStorage.setItem("cached_ratings", JSON.stringify(data));
         setIsLoading(false);
       });
-    } catch (error) {
-      console.error("Error fetching ratings:", error);
-      React.startTransition(() => {
-        setIsLoading(false);
-      });
+    } else {
+      setIsLoading(false);
     }
   };
 
@@ -58,7 +55,9 @@ export function ClientRatings() {
     }
 
     // 2. Lakukan background fetch
-    fetchTestimonials();
+    queueMicrotask(() => {
+      void fetchTestimonials();
+    });
   }, []);
 
   const filteredTestimonials = testimonials.filter(testimonial => 
