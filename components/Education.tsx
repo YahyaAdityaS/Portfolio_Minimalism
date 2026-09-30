@@ -5,17 +5,17 @@ import { GraduationCap, Buildings } from "@phosphor-icons/react";
 
 const educationData = [
   {
-    degree: "Master of Design in Interaction Design",
-    institution: "Rhode Island School of Design (RISD)",
-    period: "2020 - 2022",
-    description: "Focused on advanced digital product design, human factors, and design systems architecture.",
+    degree: "Vocational High School - Software Engineering",
+    institution: "SMK Telkom Malang",
+    period: "2023 - 2026",
+    description: "Specialized in full-stack web development and advanced UI/UX design, actively contributing to tech projects and winning regional digital product competitions.",
     icon: <GraduationCap size={32} weight="thin" />
   },
   {
-    degree: "B.S. in Computer Science & User Experience",
-    institution: "Stanford University",
-    period: "2016 - 2020",
-    description: "Studied core computer science algorithms alongside human-computer interaction research and visual arts.",
+    degree: "Independent Study & Portfolio Development",
+    institution: "Self-Directed Learning",
+    period: "2026 - Present",
+    description: "Continuously refining advanced UI/UX and full-stack development skills through personal projects while actively seeking professional opportunities.",
     icon: <Buildings size={32} weight="thin" />
   }
 ];

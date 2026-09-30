@@ -28,22 +28,22 @@ const services = [
 
 const experience = [
   {
-    role: "Senior Product Designer",
-    company: "Lumina Labs",
-    period: "2022 - Present",
-    desc: "Leading the design system and core product experience."
+    role: "Open to Work",
+    company: "Seeking Opportunities",
+    period: "Present",
+    desc: "Actively seeking UI/UX Design opportunities while continuously building a high-fidelity digital portfolio."
   },
   {
-    role: "UX Designer",
-    company: "Vertex Agency",
-    period: "2020 - 2022",
-    desc: "Delivered digital products for Fortune 500 companies."
+    role: "UI/UX Design Intern",
+    company: "Machine Vision Indonesia",
+    period: "2025 - 2026",
+    desc: "Architected a scalable UI Design System using the Atomic Design framework and engineered intuitive interfaces for complex manufacturing dashboards."
   },
   {
-    role: "Junior Designer",
-    company: "Studio Minimal",
-    period: "2018 - 2020",
-    desc: "Learned the craft of bold typography and clean grids."
+    role: "UI/UX Designer (1st Place Winner)",
+    company: "Plag-In (Regional Competition)",
+    period: "2025",
+    desc: "Designed an intuitive document submission flow and clear report visualization, securing first place in a regional UI/UX competition."
   }
 ];
 
