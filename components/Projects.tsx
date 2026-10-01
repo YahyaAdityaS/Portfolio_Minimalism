@@ -218,12 +218,15 @@ export function Projects() {
             {currentProjects.map((project, index) => (
               <motion.div
                 key={project.title + index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -6 }}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0, 
+                  transition: { duration: 0.8, delay: (index % 4) * 0.1, ease: [0.22, 1, 0.36, 1] } 
+                }}
+                whileHover={{ y: -6, transition: { type: "spring", stiffness: 300, damping: 20 } }}
                 viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
+                className="group duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-pointer"
                 onClick={() => setSelectedProject(project)}
               >
                 <div className="block">

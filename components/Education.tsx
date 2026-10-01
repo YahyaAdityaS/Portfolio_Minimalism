@@ -36,11 +36,11 @@ export function Education() {
           {educationData.map((edu, index) => (
             <motion.div
               key={edu.degree}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -6, transition: { type: "spring", stiffness: 300, damping: 20 } }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="p-10 rounded-[2.5rem] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400/50 dark:hover:border-zinc-600/50 transition-colors duration-500 hover:shadow-xl hover:shadow-zinc-950/5 dark:hover:shadow-black/20 flex flex-col justify-between"
             >
               <div>

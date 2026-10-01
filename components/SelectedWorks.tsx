@@ -112,13 +112,13 @@ export function SelectedWorks() {
               A collection of projects where form meets function, focusing on clarity and user experience.
             </p>
           </div>
-          <Link 
+          {/* <Link 
             href="#" 
             className="group flex items-center gap-2 font-medium text-zinc-900 dark:text-white transition-all"
           >
             View All Work
             <ArrowRight className="transition-transform group-hover:translate-x-1" />
-          </Link>
+          </Link> */}
         </div>
 
         {/* Minimalist Tabbing / Filter */}
@@ -146,13 +146,18 @@ export function SelectedWorks() {
           {currentProjects.map((project, index) => (
             <motion.div
               key={project.title + index}
-              whileHover={{ y: -6 }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0, 
+                transition: { duration: 0.8, delay: (index % 4) * 0.1, ease: [0.22, 1, 0.36, 1] } 
+              }}
+              whileHover={{ y: -6, transition: { type: "spring", stiffness: 300, damping: 20 } }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group duration-500 ease-out"
+              className="group duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-pointer"
             >
               <Link href={project.link} className="block">
-                <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
+                <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 mb-6 shadow-sm group-hover:shadow-lg transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-zinc-400/50 dark:group-hover:border-zinc-600/50">
                   <Image
                     src={project.image}
                     alt={project.title}

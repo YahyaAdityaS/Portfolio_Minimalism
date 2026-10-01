@@ -135,13 +135,14 @@ export function ClientRatings() {
             ))
           ) : (
             paginatedTestimonials.map((t, index) => (
-              <motion.div
+                <motion.div
                 key={t.name + index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -6, transition: { type: "spring", stiffness: 300, damping: 20 } }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative p-10 rounded-[2.5rem] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800"
+                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="relative p-10 rounded-[2.5rem] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400/50 dark:hover:border-zinc-600/50 transition-colors duration-500 hover:shadow-xl hover:shadow-zinc-950/5 dark:hover:shadow-black/20"
               >
                 <Quotes size={48} weight="fill" className="absolute top-8 right-8 text-zinc-100 dark:text-zinc-900 z-0" />
                 
