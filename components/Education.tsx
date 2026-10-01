@@ -37,9 +37,10 @@ export function Education() {
               key={edu.degree}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -6 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="p-10 rounded-[2.5rem] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-900 dark:hover:border-zinc-100 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-xl hover:shadow-zinc-950/5 dark:hover:shadow-black/20 flex flex-col justify-between"
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="p-10 rounded-[2.5rem] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400/50 dark:hover:border-zinc-600/50 transition-colors duration-500 hover:shadow-xl hover:shadow-zinc-950/5 dark:hover:shadow-black/20 flex flex-col justify-between"
             >
               <div>
                 <div className="text-zinc-900 dark:text-white mb-6">

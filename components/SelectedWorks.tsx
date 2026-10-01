@@ -146,11 +146,10 @@ export function SelectedWorks() {
           {currentProjects.map((project, index) => (
             <motion.div
               key={project.title + index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -6 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="group transition-all duration-500 ease-out hover:-translate-y-2"
+              className="group duration-500 ease-out"
             >
               <Link href={project.link} className="block">
                 <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">

@@ -29,11 +29,11 @@ export function Contact() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <button 
               onClick={() => setIsContactModalOpen(true)}
-              className="group flex items-center gap-3 bg-white text-zinc-950 px-10 py-5 rounded-full font-bold text-lg transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="group flex items-center gap-3 bg-white text-zinc-950 px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.015] active:scale-[0.98] cursor-pointer"
             >
               <EnvelopeSimple size={24} weight="bold" />
               Let&apos;s Talk
-              <ArrowRight weight="bold" className="transition-transform group-hover:translate-x-1" />
+              <ArrowRight weight="bold" className="transition-transform duration-300 ease-out group-hover:translate-x-1" />
             </button>
             
             <a 

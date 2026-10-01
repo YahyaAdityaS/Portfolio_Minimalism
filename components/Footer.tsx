@@ -38,10 +38,10 @@ export function Footer() {
 
           <button 
             onClick={scrollToTop}
-            className="group flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            className="group flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-all duration-400 ease-out hover:scale-[1.02] active:scale-[0.98]"
           >
             Back to top
-            <ArrowUp size={16} weight="bold" className="transition-transform group-hover:-translate-y-1" />
+            <ArrowUp size={16} weight="bold" className="transition-transform duration-400 ease-out group-hover:-translate-y-1" />
           </button>
         </div>
       </div>

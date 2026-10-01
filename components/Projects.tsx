@@ -220,13 +220,14 @@ export function Projects() {
                 key={project.title + index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -6 }}
                 viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="group transition-all duration-500 ease-out hover:-translate-y-2 cursor-pointer"
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="group duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
                 onClick={() => setSelectedProject(project)}
               >
                 <div className="block">
-                  <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
+                  <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 mb-6 shadow-sm group-hover:shadow-lg transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-zinc-400/50 dark:group-hover:border-zinc-600/50">
                     <Image
                       src={project.image}
                       alt={project.title}

@@ -50,7 +50,7 @@ export function Hero() {
             >
               <button 
                 onClick={() => setIsContactModalOpen(true)}
-                className="group relative flex items-center justify-center gap-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-8 py-4 rounded-full font-medium transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium transition-all duration-400 ease-out hover:scale-[1.02] active:scale-[0.98] bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
               >
                 Let&apos;s Talk
                 <ArrowUpRight weight="bold" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -58,20 +58,20 @@ export function Hero() {
 
               <button 
                 onClick={() => setIsCvOpen(true)}
-                className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-zinc-300 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-all hover:scale-[1.02] active:scale-[0.98] text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-zinc-300 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-all duration-400 ease-out hover:scale-[1.02] active:scale-[0.98] text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
               >
                 <File size={18} />
                 View CV
               </button>
               
               <div className="flex items-center gap-2">
-                <a href="https://github.com/YahyaAdityaS" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                <a href="https://github.com/YahyaAdityaS" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300 ease-out">
                   <GithubLogo size={24} />
                 </a>
-                <a href="https://linkedin.com/in/yahyadityas" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                <a href="https://linkedin.com/in/yahyadityas" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300 ease-out">
                   <LinkedinLogo size={24} />
                 </a>
-                <a href="https://dribbble.com/Putra204247T" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                <a href="https://dribbble.com/Putra204247T" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300 ease-out">
                   <DribbbleLogo size={24} />
                 </a>
                 {/* <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
