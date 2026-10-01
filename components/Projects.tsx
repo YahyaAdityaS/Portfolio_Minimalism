@@ -150,13 +150,13 @@ export function Projects() {
               A collection of projects where form meets function, focusing on clarity and user experience.
             </p>
           </div>
-          <Link 
+          {/* <Link 
             href="#" 
             className="group flex items-center gap-2 font-medium text-zinc-900 dark:text-white transition-all"
           >
             View All Work
             <ArrowRight className="transition-transform group-hover:translate-x-1" />
-          </Link>
+          </Link> */}
         </div>
 
         {/* Minimalist Tabbing / Filter */}
@@ -205,13 +205,13 @@ export function Projects() {
             <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-md leading-relaxed mb-6">
               Projects for this category are currently being prepared. You can explore other categories or view all projects.
             </p>
-            <button
+            {/* <button
               onClick={() => setSelectedCategory("All")}
               className="px-5 py-2.5 rounded-full text-xs font-semibold bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 hover:scale-[1.03] active:scale-[0.98] transition-all flex items-center gap-2 shadow-md hover:shadow-lg cursor-pointer"
             >
               <ArrowClockwise size={16} weight="bold" />
               <span>View All Projects</span>
-            </button>
+            </button> */}
           </motion.div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">

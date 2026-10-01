@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-"use client";
+ "use client";
 
 import { motion } from "motion/react";
 import { GraduationCap, Buildings } from "@phosphor-icons/react";
