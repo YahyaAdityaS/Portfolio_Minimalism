@@ -202,8 +202,8 @@ export function Certificates() {
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ y: -6 }}
                 viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.8, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="group duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
+                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="group duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
                 onClick={() => setSelectedCertificate(cert)}
               >
                 <div className="block">

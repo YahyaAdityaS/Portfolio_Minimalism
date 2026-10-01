@@ -148,7 +148,7 @@ export function SelectedWorks() {
               key={project.title + index}
               whileHover={{ y: -6 }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="group duration-500 ease-out"
             >
               <Link href={project.link} className="block">
