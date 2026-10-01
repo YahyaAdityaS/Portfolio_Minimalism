@@ -1,6 +1,6 @@
 "use client";
 
-import { GithubLogo, TwitterLogo, LinkedinLogo, InstagramLogo, DribbbleLogo, ArrowUp } from "@phosphor-icons/react";
+import { GithubLogo, LinkedinLogo, DribbbleLogo, ArrowUp } from "@phosphor-icons/react";
 
 export function Footer() {
   const scrollToTop = () => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { X, File, Copy, Download, ArrowSquareOut } from "@phosphor-icons/react";
+import { X, Copy, Download, ArrowSquareOut } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface CvModalProps {

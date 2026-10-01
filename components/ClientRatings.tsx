@@ -131,7 +131,7 @@ export function ClientRatings() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {isLoading ? (
             Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="rounded-[2.5rem] bg-zinc-100 dark:bg-zinc-900/60 animate-pulse h-[280px] p-10 flex flex-col justify-between border border-zinc-200 dark:border-zinc-800" />
+              <div key={i} className="rounded-[2.5rem] bg-zinc-100 dark:bg-zinc-900/60 animate-pulse h-70 p-10 flex flex-col justify-between border border-zinc-200 dark:border-zinc-800" />
             ))
           ) : (
             paginatedTestimonials.map((t, index) => (
@@ -143,7 +143,7 @@ export function ClientRatings() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative p-10 rounded-[2.5rem] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800"
               >
-                <Quotes size={48} weight="fill" className="absolute top-8 right-8 text-zinc-100 dark:text-zinc-900 -z-0" />
+                <Quotes size={48} weight="fill" className="absolute top-8 right-8 text-zinc-100 dark:text-zinc-900 z-0" />
                 
                 <div className="relative z-10">
                   <div className="flex gap-1 mb-6">

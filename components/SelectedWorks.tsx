@@ -153,7 +153,7 @@ export function SelectedWorks() {
               className="group transition-all duration-500 ease-out hover:-translate-y-2"
             >
               <Link href={project.link} className="block">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
+                <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
                   <Image
                     src={project.image}
                     alt={project.title}

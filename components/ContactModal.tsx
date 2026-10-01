@@ -13,6 +13,7 @@ export function ContactModal() {
   const [formData, setFormData] = useState({ nama: "", email: "", kategori: "UI/UX Design", pesan: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -236,7 +237,7 @@ export function ContactModal() {
                       <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Project Brief</label>
                       <textarea
                         placeholder="Tell me about your project, goals, and timeline..."
-                        className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-3 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all min-h-[110px] resize-none"
+                        className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-3 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all min-h-27.5 resize-none"
                         value={formData.pesan}
                         onChange={e => setFormData({...formData, pesan: e.target.value})}
                         required

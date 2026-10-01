@@ -79,7 +79,7 @@ export function CustomCursor() {
   };
 
   return (
-    <div className="pointer-events-none z-[9999] fixed inset-0">
+    <div className="pointer-events-none z-9999 fixed inset-0">
       {/* Inner Dot */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 rounded-full bg-zinc-900 dark:bg-zinc-100 -translate-x-1/2 -translate-y-1/2"

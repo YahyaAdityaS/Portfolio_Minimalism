@@ -69,3 +69,10 @@ body {
     cursor: none !important;
   }
 }
+
+/* Smooth Theme Transition (Modern Minimalist) */
+html.light *, html.dark * {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

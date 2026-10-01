@@ -64,7 +64,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 <div className="w-3.5 h-3.5 rounded-full bg-zinc-300 dark:bg-zinc-700" />
                 <div className="w-3.5 h-3.5 rounded-full bg-zinc-300 dark:bg-zinc-700" />
               </div>
-              <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 truncate max-w-[200px] sm:max-w-xs">
+              <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 truncate max-w-50 sm:max-w-xs">
                 {project.title}
               </div>
               <div className="flex items-center gap-3">

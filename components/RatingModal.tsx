@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { X, ArrowRight, Check, Sparkle, Star, Pencil } from "@phosphor-icons/react";
+import { X, Check, Star, Pencil } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface RatingModalProps {
@@ -217,7 +217,7 @@ export function RatingModal({ isOpen, onClose, onSuccess }: RatingModalProps) {
                     <div className="space-y-1.5">
                       <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Feedback</label>
                       <textarea
-                        className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-3 text-sm min-h-[100px] resize-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all"
+                        className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-3 text-sm min-h-25 resize-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all"
                         value={formData.feedback}
                         onChange={e => setFormData({...formData, feedback: e.target.value})}
                         required

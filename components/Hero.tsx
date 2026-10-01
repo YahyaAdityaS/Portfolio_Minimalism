@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowUpRight, GithubLogo, TwitterLogo, LinkedinLogo, InstagramLogo, DribbbleLogo, File } from "@phosphor-icons/react";
+import { ArrowUpRight, GithubLogo, LinkedinLogo, DribbbleLogo, File } from "@phosphor-icons/react";
 import Image from "next/image";
 import { CvModal } from "./CvModal";
 import { useModal } from "@/lib/modal-context";
@@ -88,7 +88,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative mx-auto w-full max-w-[320px] sm:max-w-[360px] md:w-[40%] shrink-0"
+            className="group relative mx-auto w-full max-w-[320px] sm:max-w-90 md:w-[40%] shrink-0"
           >
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl shadow-xl overflow-hidden transition-colors duration-100">
               {/* macOS Header */}

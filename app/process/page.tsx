@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, EnvelopeSimple, Sparkle } from "@phosphor-icons/react";
 import { useModal } from "@/lib/modal-context";
@@ -8,6 +7,7 @@ import { motion } from "motion/react";
 
 export default function ProcessPage() {
   const { setIsContactModalOpen } = useModal();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const totalSlides = 6;
 
   const sectionVariants = {
@@ -20,7 +20,7 @@ export default function ProcessPage() {
   };
 
   return (
-    <div className="min-h-screen min-h-[100dvh] w-full overflow-x-hidden flex flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-zinc-200 dark:selection:bg-zinc-800 selection:text-zinc-900 dark:selection:text-white">
+    <div className="min-h-screen w-full overflow-x-hidden flex flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-zinc-200 dark:selection:bg-zinc-800 selection:text-zinc-900 dark:selection:text-white">
       {/* Header - Fixed to top, safe area included in px/pt */}
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 sm:px-12 md:px-16 py-6 pt-[max(1.5rem,env(safe-area-inset-top))]">
         <Link 

@@ -28,7 +28,7 @@ interface GasCertificate {
 function CertificateSkeleton() {
   return (
     <div className="group">
-      <div className="aspect-[4/3] w-full rounded-3xl bg-zinc-200 dark:bg-zinc-800 animate-pulse mb-6" />
+      <div className="aspect-4/3 w-full rounded-3xl bg-zinc-200 dark:bg-zinc-800 animate-pulse mb-6" />
       <div className="flex items-center justify-between">
         <div className="w-full">
           <div className="h-5 w-3/4 rounded-md bg-zinc-200 dark:bg-zinc-800 animate-pulse mb-2" />
@@ -103,6 +103,7 @@ export function Certificates() {
     };
 
     restoreCachedCertificates();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const fetchTimeout = window.setTimeout(() => {
       void fetchCertificates();
     }, 0);
@@ -205,7 +206,7 @@ export function Certificates() {
                 onClick={() => setSelectedCertificate(cert)}
               >
                 <div className="block">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
+                  <div className="relative aspect-4/3 overflow-hidden rounded-3xl bg-zinc-200 dark:bg-zinc-800 mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
                     {cert.image && (
                       <Image
                         src={cert.image}

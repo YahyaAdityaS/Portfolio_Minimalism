@@ -62,7 +62,7 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
                 <div className="w-3.5 h-3.5 rounded-full bg-zinc-300 dark:bg-zinc-700" />
                 <div className="w-3.5 h-3.5 rounded-full bg-zinc-300 dark:bg-zinc-700" />
               </div>
-              <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 truncate max-w-[200px] sm:max-w-xs">
+              <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 truncate max-w-50 sm:max-w-xs">
                 {certificate.name}
               </div>
               <div className="flex items-center gap-2 text-zinc-400">
@@ -94,7 +94,7 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
 
               {/* Certificate Image Preview */}
               {certificate.image && (
-                <div className="relative aspect-[4/3] sm:aspect-video w-full rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-800 mb-6">
+                <div className="relative aspect-4/3 sm:aspect-video w-full rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-200 dark:bg-zinc-800 mb-6">
                   <Image
                     src={certificate.image}
                     alt={certificate.name}

@@ -10,7 +10,7 @@ export function Contact() {
   return (
     <section className="py-24 md:py-40 bg-zinc-950 text-white overflow-hidden relative" id="contact">
       {/* Decorative background element */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-zinc-900 rounded-full blur-[120px] opacity-50 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-zinc-900 rounded-full blur-[120px] opacity-50 pointer-events-none" />
 
       <div className="w-full mx-auto px-6 sm:px-8 md:px-[7%] lg:px-[7%] xl:px-[7%] relative z-10 text-center">
         <motion.div
