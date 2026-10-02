@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { X, Copy, Download, ArrowSquareOut } from "@phosphor-icons/react";
+import { useState, useEffect } from "react";
+import { X, Copy, Download, ArrowSquareOut, Check } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface CvModalProps {
@@ -20,12 +20,21 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  const cvViewLink = "https://drive.google.com/file/d/1rSXGObV0gSFPoxPANym7BfsEy5t1GIcy/view?usp=drive_link";
+  const cvViewLink = "https://drive.google.com/uc?export=download&id=1rSXGObV0gSFPoxPANym7BfsEy5t1GIcy";
   const cvEmbedLink = "https://drive.google.com/file/d/1rSXGObV0gSFPoxPANym7BfsEy5t1GIcy/preview";
+
+  const [isCopied, setIsCopied] = useState(false);
+  const [isDownloaded, setIsDownloaded] = useState(false);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(cvViewLink);
-    alert("Link CV berhasil disalin!");
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
+
+  const handleDownload = () => {
+    setIsDownloaded(true);
+    setTimeout(() => setIsDownloaded(false), 2000);
   };
 
   return (
@@ -61,14 +70,48 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
               </div>
               <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Yahya_Aditya_CV.pdf</div>
               <div className="flex items-center gap-3">
-                <a href={cvViewLink} target="_blank" rel="noopener noreferrer" title="Buka Drive" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
+                <a href={cvViewLink} target="_blank" rel="noopener noreferrer" title="Open Drive" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
                   <ArrowSquareOut size={18} />
                 </a>
-                <button onClick={handleCopyLink} title="Salin Link" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
-                  <Copy size={18} />
+                <button onClick={handleCopyLink} title="Copy Link" className="relative text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-200">
+                  <motion.div
+                    initial={false}
+                    animate={{ scale: isCopied ? 0 : 1, opacity: isCopied ? 0 : 1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Copy size={18} />
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: isCopied ? 1 : 0, opacity: isCopied ? 1 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Check size={18} className="text-zinc-600" />
+                  </motion.div>
                 </button>
-                <a href={cvViewLink} download title="Download CV" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
-                  <Download size={18} />
+                <a 
+                  href={cvViewLink} 
+                  download 
+                  onClick={handleDownload}
+                  title="Download CV" 
+                  className="relative text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-200"
+                >
+                  <motion.div
+                    initial={false}
+                    animate={{ scale: isDownloaded ? 0 : 1, opacity: isDownloaded ? 0 : 1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Download size={18} />
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: isDownloaded ? 1 : 0, opacity: isDownloaded ? 1 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Check size={18} className="text-zinc-600" />
+                  </motion.div>
                 </a>
               </div>
             </div>
