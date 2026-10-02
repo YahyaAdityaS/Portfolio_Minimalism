@@ -90,7 +90,7 @@ export function ServicesExperience() {
                   whileHover={{ x: 4, transition: { type: "spring", stiffness: 300, damping: 20 } }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className="group relative pb-8 border-b border-zinc-200/50 dark:border-zinc-700/50 last:border-0 transition-colors duration-100 p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 rounded-2xl"
+                  className="group relative pb-5 transition-colors duration-100 p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 rounded-2xl"
                 >
                   <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-4">
                     <h3 className="text-2xl font-bold tracking-tight group-hover:text-zinc-500 transition-colors">

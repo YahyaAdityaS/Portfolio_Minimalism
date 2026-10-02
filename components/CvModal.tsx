@@ -20,8 +20,8 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  const cvViewLink = "https://drive.google.com/file/d/1idau8HpnGoDLpPuugrO8oyWZEq3dn4kg/view?usp=sharing";
-  const cvEmbedLink = "https://drive.google.com/file/d/1idau8HpnGoDLpPuugrO8oyWZEq3dn4kg/preview";
+  const cvViewLink = "https://drive.google.com/file/d/1rSXGObV0gSFPoxPANym7BfsEy5t1GIcy/view?usp=drive_link";
+  const cvEmbedLink = "https://drive.google.com/file/d/1rSXGObV0gSFPoxPANym7BfsEy5t1GIcy/preview";
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(cvViewLink);

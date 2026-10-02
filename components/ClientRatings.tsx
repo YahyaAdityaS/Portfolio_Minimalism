@@ -90,13 +90,15 @@ export function ClientRatings() {
               Trusted by industry leaders to deliver exceptional digital experiences.
             </p>
           </div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => setIsRatingModalOpen(true)}
-            className="bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-6 py-3 rounded-full text-sm font-semibold flex items-center gap-2 hover:scale-105 active:scale-95 transition-all shadow-md cursor-pointer"
+            className="bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-6 py-3 rounded-full text-sm font-semibold flex items-center gap-2 shadow-sm hover:shadow-xl transition-shadow duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
           >
             <Pencil size={16} />
             Write a Review
-          </button>
+          </motion.button>
         </div>
 
         <div className="mb-12 flex flex-wrap items-center gap-3">

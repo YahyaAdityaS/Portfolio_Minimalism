@@ -48,13 +48,15 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-wrap items-center gap-2"
             >
-              <button 
+              <motion.button 
+                whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setIsContactModalOpen(true)}
-                className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium transition-all duration-400 ease-out hover:scale-[1.02] active:scale-[0.98] bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium shadow-sm hover:shadow-xl transition-shadow duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
               >
                 Let&apos;s Talk
-                <ArrowUpRight weight="bold" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
+                <ArrowUpRight weight="bold" className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5" />
+              </motion.button>
 
               <button 
                 onClick={() => setIsCvOpen(true)}

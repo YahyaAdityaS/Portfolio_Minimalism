@@ -27,14 +27,16 @@ export function Contact() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <button 
-              onClick={() => setIsContactModalOpen(true)}
-              className="group flex items-center gap-3 bg-white text-zinc-950 px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.015] active:scale-[0.98] cursor-pointer"
-            >
-              <EnvelopeSimple size={24} weight="bold" />
-              Let&apos;s Talk
-              <ArrowRight weight="bold" className="transition-transform duration-300 ease-out group-hover:translate-x-1" />
-            </button>
+            <motion.button 
+                whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setIsContactModalOpen(true)}
+                className="group flex items-center gap-3 bg-white text-zinc-950 px-10 py-5 rounded-full font-bold text-lg shadow-sm hover:shadow-xl transition-shadow duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
+              >
+                <EnvelopeSimple size={24} weight="bold" />
+                Let&apos;s Talk
+                <ArrowRight weight="bold" className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5" />
+              </motion.button>
             
             <a 
               href="/process"

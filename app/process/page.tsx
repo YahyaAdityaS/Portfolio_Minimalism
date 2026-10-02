@@ -109,15 +109,17 @@ export default function ProcessPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => setIsContactModalOpen(true)}
-              className="group flex items-center gap-2 bg-black text-white dark:bg-white dark:text-zinc-950 px-8 py-4 rounded-full font-medium text-base transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-md"
+              className="group flex items-center gap-2 bg-black text-white dark:bg-white dark:text-zinc-950 px-8 py-4 rounded-full font-medium text-base shadow-sm hover:shadow-xl transition-shadow duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer"
             >
               <EnvelopeSimple size={20} weight="bold" />
               Let&apos;s Talk
 
-              <ArrowRight weight="bold" className="transition-transform group-hover:translate-x-1" />
-            </button>
+              <ArrowRight weight="bold" className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5" />
+            </motion.button>
 
             <Link
               href="/"

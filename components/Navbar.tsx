@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "motion/react";
 import { useState, useEffect, useRef } from "react";
 import { useModal } from "@/lib/modal-context";
 import Link from "next/link";
@@ -92,16 +93,35 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className={cn(
-      "fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out",
-      scrolled ? "top-4 px-4 sm:px-6" : "top-0 px-0"
-    )}>
-      <div className={cn(
-        "mx-auto flex items-center justify-between transition-all duration-500 ease-in-out",
-        scrolled 
-          ? "w-full max-w-5xl bg-white/70 dark:bg-zinc-950/70 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-full px-6 py-3 shadow-sm" 
-          : "w-full rounded-none bg-transparent px-6 md:px-12 py-6 border-0 shadow-none"
-      )}>
+    <motion.header
+      initial={false}
+      animate={{
+        top: scrolled ? 16 : 0,
+        paddingLeft: scrolled ? 16 : 0,
+        paddingRight: scrolled ? 16 : 0,
+      }}
+      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed left-0 right-0 z-50 px-4 sm:px-6"
+    >
+      <motion.div
+        initial={false}
+        animate={{
+          maxWidth: scrolled ? "1000px" : "100%",
+          backgroundColor: scrolled 
+            ? resolvedTheme === "dark" ? "rgba(24, 24, 27, 0.7)" : "rgba(255, 255, 255, 0.7)"
+            : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "blur(0px)",
+          borderWidth: scrolled ? 1 : 0,
+          borderRadius: scrolled ? 9999 : 0,
+          paddingLeft: scrolled ? 24 : 24, // Sm px-6 is 24px
+          paddingRight: scrolled ? 24 : 24,
+          paddingTop: scrolled ? 12 : 24,
+          paddingBottom: scrolled ? 12 : 24,
+        }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="mx-auto flex items-center justify-between border-zinc-200 dark:border-zinc-800 shadow-sm"
+      >
+
         <Link 
           href="/" 
           className="text-xl font-bold tracking-tighter"
@@ -150,12 +170,14 @@ export function Navbar() {
             </button>
           )}
 
-          <button 
-            onClick={() => setIsContactModalOpen(true)}
-            className="ml-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-5 py-2.5 rounded-full text-sm font-bold transition-transform hover:scale-105 active:scale-95 shadow-sm"
-          >
-            Let&apos;s Talk
-          </button>
+              <motion.button
+                whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setIsContactModalOpen(true)}
+                className="ml-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-5 py-2.5 rounded-full text-sm font-bold shadow-sm hover:shadow-xl transition-shadow duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              >
+                Let&apos;s Talk
+              </motion.button>
         </div>
         
         <button 
@@ -165,8 +187,7 @@ export function Navbar() {
           <div className={cn("w-6 h-0.5 bg-zinc-900 dark:bg-zinc-100 transition-transform", menuOpen && "rotate-45 translate-y-2")} />
           <div className={cn("w-6 h-0.5 bg-zinc-900 dark:bg-zinc-100 transition-opacity", menuOpen && "opacity-0")} />
         </button>
-      </div>
-
+      </motion.div>
       {menuOpen && (
         <div className="md:hidden absolute left-4 right-4 top-20 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-xl flex flex-col gap-4">
           {navLinks.map((link) => (
@@ -200,6 +221,6 @@ export function Navbar() {
           )}
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }
