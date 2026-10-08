@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowUpRight, GithubLogo, LinkedinLogo, DribbbleLogo, File } from "@phosphor-icons/react";
+import { ArrowUpRight, GithubLogo, LinkedinLogo, DribbbleLogo, FacebookLogo, File } from "@phosphor-icons/react";
 import Image from "next/image";
 import { CvModal } from "./CvModal";
 import { useModal } from "@/lib/modal-context";
@@ -76,8 +76,8 @@ export function Hero() {
                 <a href="https://dribbble.com/Putra204247T" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors duration-300 ease-out">
                   <DribbbleLogo size={24} />
                 </a>
-                {/* <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                  <TwitterLogo size={24} />
+                {/* <a href="https://www.facebook.com/yahyadityas#" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                  <FacebookLogo size={24} />
                 </a> */}
                 {/* <a href="https://www.instagram.com/yahyaditya.s/" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                   <InstagramLogo size={24} />

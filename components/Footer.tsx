@@ -1,6 +1,6 @@
 "use client";
 
-import { GithubLogo, LinkedinLogo, DribbbleLogo, ArrowUp } from "@phosphor-icons/react";
+import { GithubLogo, LinkedinLogo, DribbbleLogo,FacebookLogo,InstagramLogo, ArrowUp } from "@phosphor-icons/react";
 
 export function Footer() {
   const scrollToTop = () => {
@@ -28,12 +28,12 @@ export function Footer() {
             <a href="https://dribbble.com/Putra204247T" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
               <DribbbleLogo size={24} />
             </a>
-            {/* <a href="#" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
-              <TwitterLogo size={24} />
-            </a> */}
-            {/* <a href="https://www.instagram.com/yahyaditya.s/" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+            <a href="https://www.instagram.com/yahyadityas/" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
               <InstagramLogo size={24} />
-            </a> */}
+            </a>
+            <a href="https://www.facebook.com/yahyadityas#" target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                  <FacebookLogo size={24} />
+            </a>
           </div>
 
           <button 
